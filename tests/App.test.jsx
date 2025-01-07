@@ -3,7 +3,7 @@ The only reason I've kept the import is as a reminder
 of available test-function */
 import { describe, it, expect } from "vitest";
 import App from "../src/App";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 describe("something truthy and falsy", () => {
   it("true to be true", () => {
@@ -20,6 +20,13 @@ describe("App", () => {
     render(<App title="React" />);
 
     screen.debug;
+  });
+});
+
+describe("App component", () => {
+  it("Renders the correct heading", () => {
+    render(<App />);
+    expect(screen.getByRole("heading").textContent).toMatch(/our first test/i);
   });
 });
 
