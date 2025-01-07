@@ -3,30 +3,24 @@ The only reason I've kept the import is as a reminder
 of available test-function */
 import { describe, it, expect } from "vitest";
 import App from "../src/App";
+import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 
-describe("something truthy and falsy", () => {
-  it("true to be true", () => {
-    expect(true).toBe(true);
-  });
-
-  it("false to be false", () => {
-    expect(false).toBe(false);
-  });
-});
-
-describe("App", () => {
-  it("renders headline", () => {
-    render(<App title="React" />);
-
-    screen.debug;
-  });
-});
-
 describe("App component", () => {
-  it("Renders the correct heading", () => {
+  it("renders magnificent monkeys", () => {
+    const { container } = render(<App />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it("renders radical rhinos after button click", async () => {
+    const user = userEvent.setup();
+
     render(<App />);
-    expect(screen.getByRole("heading").textContent).toMatch(/our first test/i);
+    const button = screen.getByRole("button", { name: "Click Me" });
+
+    await user.click(button);
+
+    expect(screen.getByRole("heading").textContent).toMatch(/radical rhinos/i);
   });
 });
 
