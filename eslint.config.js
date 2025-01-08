@@ -33,6 +33,12 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "jest/no-large-snapshots": [
+        "warn",
+        {
+          "maxSize": 20,
+        }
+      ],
     },
   },
 ]
